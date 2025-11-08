@@ -1,6 +1,3 @@
-Here is the text formatted as a `README.md` file for GitHub.
-
-````markdown:readme.md
 # VigoLang - A Satirical Programming Language
 ---
 
