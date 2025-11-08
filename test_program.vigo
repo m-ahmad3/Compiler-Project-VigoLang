@@ -1,207 +1,74 @@
 #* 
-VigoLang Test Program
-Author: Muhammad Ahmad
-Reg: L1F22BSCS0684
-Section: G1
-Date: 24/02/25
-This program demonstrates all VigoLang features
+VigoLang Factorial Calculator 
 *#
+### Author: Muhammad Ahmad
 
-## Main function starts here
 ghq[[ ]] {{
-    ## Variable declarations
-    qaidi_no ^counter := 801@
-    qaidi_no ^limit := 1000@
+    qaidi_no ^num := 5@
+    qaidi_no ^fact := 1@
+    qaidi_no ^i := 1@
     qaidi_no ^sum := 0@
-    qaidi_no ^result := 0@
-    float_sarkar ^ratio := 10.5@
-    bayania ^narrative := "Sazish hai"@
-    bayania ^name := "Prisoner"@
-    ishara ^code_letter := 'X'@
+    qaidi_no ^temp := 0@
+    float_sarkar ^ratio := 2.5@
+    bayania ^msg := "Calculating"@
+    ishara ^grade := 'A'@
     
-    ## Display initial message
-    farmaan << "Current Prisoner: "@
-    farmaan << ^counter@
-    farmaan << "\n"@
+    farmaan << "Factorial Program"@
+    farmaan << ^num@
     
-    ## Conditional statement with comparison
-    order_hai [[ ^counter =? 804 ]] {{
-        farmaan << "Target reached"@
-        deal_ho_gai@
+    order_hai [[ ^num <? 0 ]] {{
+        farmaan << "Negative not allowed"@
+        ^num := 0@
     }}
-    
-    ## Multiple conditions
-    order_hai [[ ^threat >? 9 ]] {{
-        farmaan << "High threat level"@
-    }}
-    doosra_order [[ ^threat >? 5 ]] {{
-        farmaan << "Medium threat"@
+    doosra_order [[ ^num =? 0 ]] {{
+        ^fact := 1@
+        farmaan << "Result is 1"@
     }}
     warna_vigo {{
-        farmaan << "Low threat"@
-    }}
-    
-    ## For loop demonstration
-    long_march [[ ^counter := 801@ ^counter <? 805@ ^counter := ^counter +: 1 ]] {{
-        farmaan << "March iteration: "@
-        farmaan << ^counter@
-        
-        ## Nested condition with break
-        order_hai [[ ^counter =? 804 ]] {{
-            farmaan << "Breaking at checkpoint"@
-            deal_ho_gai@
+        long_march [[ ^i := 1@ ^i <? ^num +: 1@ ^i := ^i +: 1 ]] {{
+            ^fact := ^fact *: ^i@
+            
+            order_hai [[ ^i =? 10 ]] {{
+                farmaan << "Max limit"@
+                deal_ho_gai@
+            }}
+            
+            order_hai [[ ^i =? 3 ]] {{
+                chaltay_raho@
+            }}
+            
+            ^sum := ^sum +: ^i@
         }}
-        
-        ## Arithmetic operations
-        ^sum := ^sum +: ^counter@
-        ^result := ^counter *: 2@
-        farmaan << ^result@
     }}
     
-    ## While loop demonstration
-    qaidi_no ^validator := 3@
-    jab_tak_missing [[ ^validator >? 0 ]] {{
-        farmaan << "Validating..."@
-        ^validator := ^validator -: 1@
-        
-        ## Continue example
-        order_hai [[ ^validator =? 1 ]] {{
-            chaltay_raho@
-        }}
-        
-        farmaan << "Validation step"@
+    farmaan << ^fact@
+    
+    ^temp := ^num@
+    jab_tak_missing [[ ^temp >? 0 ]] {{
+        ^temp := ^temp -: 1@
     }}
     
-    ## More arithmetic
-    ^result := ^sum +: 100@
-    ^result := ^result -: 50@
-    ^result := ^result *: 2@
+    ^helper[[ ^num, ^fact ]]@
     
-    ## Input demonstration
-    bayania ^user_input := "default"@
-    farmaan << "Enter data: "@
-    taftish >> ^user_input@
-    
-    ## Function call
-    ^process_data[[ ^counter, ^sum ]]@
-    
-    ## Exponential number
-    float_sarkar ^scientific := 1.5e10@
-    farmaan << ^scientific@
-    
-    ## Final return
     nro 0@
 }}
 
-## Helper function definition
-namaloom ^process_data[[ qaidi_no ^x, qaidi_no ^y ]] {{
-    qaidi_no ^temp := ^x +: ^y@
-    ^temp := ^temp *: 2@
-    
-    order_hai [[ ^temp >? 1000 ]] {{
-        farmaan << "Processing threshold exceeded"@
-    }}
-    warna_vigo {{
-        farmaan << "Processing complete"@
-    }}
+namaloom ^helper[[ qaidi_no ^a, qaidi_no ^b ]] {{
+    qaidi_no ^result := ^a +: ^b@
+    farmaan << ^result@
 }}
 
-## Class definition
-safehouse ^DataManager {{
-    qaidi_no ^id@
-    bayania ^title@
-    float_sarkar ^value@
-    
-    namaloom ^initialize[[ ]] {{
-        ^id := 1@
-        ^title := "Manager"@
-        ^value := 99.9@
-    }}
-    
-    namaloom ^display[[ ]] {{
-        farmaan << "ID: "@
-        farmaan << ^id@
-        farmaan << ^title@
-    }}
+safehouse ^calculator {{
+    qaidi_no ^value@
+    float_sarkar ^pi := 3.14@
+    bayania ^name := "calc"@
 }}@
 
-## Constants definition
-ain qaidi_no ^MAX_LIMIT := 9999@
-ain qaidi_no ^MIN_LIMIT := 1@
-ain float_sarkar ^PI := 3.14159@
+ain qaidi_no ^max := 100@
 
-## Boolean values
-qaidi_no ^is_active := neutral@
-qaidi_no ^is_traitor := janwar@
+qaidi_no ^flag := neutral@
+qaidi_no ^status := janwar@
 
-## Character operations
-ishara ^grade := 'A'@
-ishara ^status_code := 'Y'@
+bayania ^final := "Done"@
 
-## More string operations
-bayania ^message1 := "Order executed"@
-bayania ^message2 := "Operation complete"@
-
-farmaan << "Program execution finished"@
-```
-
----
-
-## **Part 3: Complete PDF Documentation Content**
-
-### **Section 1: Regular Expression Table (matching your handwritten work)**
-
-| Token Type | Regular Expression | Example | Notes |
-|------------|-------------------|---------|-------|
-| **Identifier** | `\^[a-z]([a-z]\|[0-9]\|_)*` | `^file`, `^counter` | Starts with caret (^) + lowercase |
-| **Integer** | `[0-9]+` | `798`, `-788` | One or more digits |
-| **Float** | `[0-9]+\.[0-9]+` | `10.5` | Digits.Digits format |
-| **Exponential** | `[0-9]+(\.[ 0-9]+)?[eE][+-]?[0-9]+` | `1.5e10`, `2E-5` | Scientific notation |
-| **String Literal** | `"[^"]*"` | `"Sazish"` | Double-quoted text |
-| **Char Literal** | `'[^']'` | `'X'` | Single character in quotes |
-| **Addition** | `\+:` | `+:` | Plus with colon |
-| **Subtraction** | `-:` | `-:` | Minus with colon |
-| **Multiplication** | `\*:` | `*:` | Star with colon |
-| **Assignment** | `:=` | `:=` | Colon-equals |
-| **Equality** | `=\?` | `=?` | Equals-question |
-| **Greater Than** | `>\?` | `>?` | Greater-question |
-| **Less Than** | `<\?` | `<?` | Less-question |
-| **Stream Output** | `<<` | `<<` | Double less-than |
-| **Stream Input** | `>>` | `>>` | Double greater-than |
-| **Statement Terminator** | `@` | `@` | At symbol |
-| **Block Start** | `\{\{` | `{{` | Double open brace |
-| **Block End** | `\}\}` | `}}` | Double close brace |
-| **Expression Start** | `\[\[` | `[[` | Double open bracket |
-| **Expression End** | `\]\]` | `]]` | Double close bracket |
-| **Separator** | `,` | `,` | Comma |
-| **Increment** | `\^i\+\+` | `^i++` | Variable increment |
-| **Decrement** | `\^i--` | `^i--` | Variable decrement |
-| **Multi-line Comment** | `#\*([^\*]\|\*+[^*#])*\*#` | `#* text *#` | Hash-star delimited |
-| **Single-line Comment** | `##[^\n]*` | `## comment` | Double hash to EOL |
-| **Keywords** | Exact match | `ghq`, `safehouse`, `nro`, etc. | All 20 keywords |
-
----
-
-### **Section 2: Finite Automata Diagrams (matching your drawings)**
-
-I'll provide the descriptions based on your handwritten FA diagrams:
-
-#### **FA 1: Identifier (`\^[a-z]([a-z]\|[0-9]\|_)*`)**
-```
-States:
-q0: Start state
-q1: After seeing ^
-q2: After first lowercase letter (Accept state)
-q3: Dead state (other characters)
-
-Transitions:
-q0 --^--> q1
-q0 --other--> q3 (dead)
-
-q1 --[a-z]--> q2 (Accept)
-q1 --other--> q3 (dead)
-
-q2 --[a-z0-9_]--> q2 (Accept, loop)
-q2 --other--> q3 (dead)
-
-q3 --any--> q3 (trap state)
+farmaan << "Complete"@
