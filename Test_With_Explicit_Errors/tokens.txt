@@ -1,0 +1,46 @@
+════════════════════════════════════════════════════════
+           VigoLang Lexical Analyzer Output             
+           Author: Muhammad Ahmad                       
+           Reg: L1F22BSCS0634                           
+           Input File: test_with_errors.vigo         
+════════════════════════════════════════════════════════
+
+Line 3: PUNCTUATION_COMMA -> ,
+Line 5: KEYWORD_MAIN -> ghq
+Line 5: PUNCTUATION_EXPR_START -> [[
+Line 5: PUNCTUATION_EXPR_END -> ]]
+Line 5: PUNCTUATION_BLOCK_START -> {{
+Line 8: OPERATOR_ASSIGN -> :=
+Line 8: NUMBER_INTEGER -> 10
+Line 8: PUNCTUATION_TERMINATOR -> @
+Line 11: NUMBER_INTEGER -> 9
+Line 11: OPERATOR_ASSIGN -> :=
+Line 11: NUMBER_INTEGER -> 9
+Line 11: PUNCTUATION_TERMINATOR -> @
+Line 14: KEYWORD_INT -> qaidi_no
+Line 14: IDENTIFIER -> ^bad_num
+Line 14: OPERATOR_ASSIGN -> :=
+Line 14: PUNCTUATION_TERMINATOR -> @
+Line 17: IDENTIFIER -> ^num
+Line 17: OPERATOR_ASSIGN -> :=
+Line 17: NUMBER_INTEGER -> 5
+Line 17: NUMBER_INTEGER -> 3
+Line 17: PUNCTUATION_TERMINATOR -> @
+Line 17: OPERATOR_ADD -> +:
+Line 20: KEYWORD_STRING -> bayania
+Line 20: IDENTIFIER -> ^msg
+Line 20: OPERATOR_ASSIGN -> :=
+Line 20: STRING_LITERAL -> "This string never ends
+
+farmaan << "
+Line 20: PUNCTUATION_COMMA -> ,
+Line 20: PUNCTUATION_TERMINATOR -> @
+Line 26: PUNCTUATION_BLOCK_END -> }}
+
+════════════════════════════════════════════════════════
+                   Scanning Statistics                   
+════════════════════════════════════════════════════════
+Total Lines Processed:    28
+Total Tokens Recognized:  29
+Total Errors Found:       129
+════════════════════════════════════════════════════════

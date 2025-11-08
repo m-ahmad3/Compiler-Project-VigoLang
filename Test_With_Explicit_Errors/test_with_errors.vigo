@@ -1,0 +1,30 @@
+#* This file is designed to test all error cases *#
+
+This is a single line comment, it should be ignored
+
+ghq[[ ]] {{
+
+### Error: Invalid Identifier (missing ^)
+my_var := 10@
+
+### Error: Invalid Identifier (starts with digit)
+^9number := 9@
+
+### Error: Invalid Number (sign with no digits)
+qaidi_no ^bad_num := +@
+
+### Error: Invalid Token (stray operator part)
+^num := 5 + 3@  # Should be +:
+
+### Error: Unclosed String
+bayania ^msg := "This string never ends
+
+farmaan << "I am on a new line, the string was an error"@
+
+### Error: Invalid Tokens (characters not in the language)
+& $ %
+
+
+}}
+
+#* This comment will not be closed
