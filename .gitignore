@@ -1,0 +1,21 @@
+# Ignore Flex-generated files
+lex.yy.c
+lex.yy.o
+
+# Ignore compiled binary/executable
+scanner
+Output
+*.out
+*.exe
+
+# Ignore general build files
+*.o
+*.obj
+*.log
+
+# Ignore backups and temporary files
+*~
+*.swp
+*.bak
+*.tmp
+
