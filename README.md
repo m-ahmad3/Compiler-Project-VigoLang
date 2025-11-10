@@ -1,9 +1,11 @@
-# VigoLang
-
 <!-- Title Banner -->
-<div style="background-color:#000;color:#fff;padding:25px;border-radius:10px;text-align:center;">
-  <h1 style="margin:0;font-size:45px;font-family:'Segoe UI',Roboto,Arial,sans-serif;">VigoLang</h1>
-  <p style="margin:8px 0 0;font-size:18px;">A Satirical Urdu-Inspired Programming Language</p>
+<div align="center" style="background-color:#000;color:#fff;padding:40px;border-radius:12px;margin:20px 0;">
+  <h1 style="font-size:60px;margin:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;">
+    VigoLang
+  </h1>
+  <p style="font-size:22px;margin:10px 0 0;">
+    A Satirical Urdu-Inspired Programming Language
+  </p>
 </div>
 
 ---
@@ -11,7 +13,7 @@
 ## Overview
 
 **VigoLang** is a satirical, Urdu-inspired programming language designed as part of a compiler construction project.  
-It blends humor with structured programming ideas — featuring its own syntax, keywords, and operators.
+It blends humor with structured programming concepts — featuring its own syntax, keywords, and operators.
 
 ---
 
