@@ -24,18 +24,18 @@ It blends humor with structured programming concepts — featuring its own synta
 | `ghq` | main function |
 | `safehouse` | class definition |
 | `nro` | return |
-| `order hai` | if |
-| `doosra order` | else if |
-| `warna vigo` | else |
-| `long march` | for loop |
-| `jab tak missing` | while loop |
-| `deal ho gai` | break |
-| `chaltay raho` | continue |
+| `order_hai` | if |
+| `doosra_order` | else if |
+| `warna_vigo` | else |
+| `long_march` | for loop |
+| `jab_tak_missing` | while loop |
+| `deal_ho_gai` | break |
+| `chaltay_raho` | continue |
 | `farmaan` | print/output |
 | `taftish` | input |
-| `qaidi no` | integer type |
+| `qaidi_no` | integer type |
 | `bayania` | string type |
-| `float sarkar` | float type |
+| `float_sarkar` | float type |
 | `ishara` | character type |
 | `namaloom` | void type |
 | `ain` | constant |
@@ -79,10 +79,10 @@ Here’s a small example written in **VigoLang** syntax:
 #* Sample VigoLang Program *#
 
 ghq[[ ]] {{
-  qaidi no ^count := 5@
+  qaidi_no ^count := 5@
   farmaan << "Counting Down"@
   
-  jab tak missing(^count >? 0) {{
+  jab_tak_missing(^count >? 0) {{
     farmaan << "Current: " << ^count@
     ^count -: 1@
   }}@
