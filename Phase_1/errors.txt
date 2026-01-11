@@ -1,6 +1,6 @@
 ════════════════════════════════════════════════════════
            VigoLang Lexical Error Report                
-           Input File: test_program.vigo             
+           Input File: valid_program.vigo            
 ════════════════════════════════════════════════════════
 
 No lexical errors found!

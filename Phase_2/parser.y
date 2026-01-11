@@ -9,11 +9,21 @@ extern int line_num;
 extern char *yytext;
 extern FILE *yyin;
 
+/* Token value storage from scanner */
+extern char current_id[256];
+extern char current_type[32];
+extern char current_value[256];
+
 /* Error handling function */
 void yyerror(const char *s);
 
 /* Success flag */
 int parse_success = 1;
+
+/* Helper variables for storing parsed names */
+char saved_id[256] = "";
+char saved_type[32] = "";
+char saved_value[256] = "";
 %}
 
 /* Token declarations - matching Phase 1 scanner */
@@ -77,22 +87,39 @@ int parse_success = 1;
    GRAMMAR RULES FOR VIGOLANG
    ============================================ */
 
-/* Program Structure */
+/* Program Structure - Allows declarations before and/or after main function */
 program
-    : declaration_list main_function
+    : global_list
         { printf("   ✓ Program structure validated\n"); }
-    | main_function
-        { printf("   ✓ Program structure validated\n"); }
+    ;
+
+global_list
+    : global_item global_list
+    | global_item
+    ;
+
+global_item
+    : main_function
+    | declaration
+    | global_statement
     ;
 
 main_function
     : KEYWORD_GHQ PUNCT_EXPR_START PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END
-        { printf("   ✓ Main function (ghq) parsed successfully\n"); }
+        { printf("   ✓ Line %d: Main function (ghq) parsed successfully\n", line_num); }
     ;
 
+/* Unused - kept for reference
 declaration_list
     : declaration declaration_list
     | declaration
+    ;
+*/
+
+/* Global-level statements (like farmaan at top level) */
+global_statement
+    : output_statement
+    | input_statement
     ;
 
 declaration
@@ -105,31 +132,31 @@ declaration
 /* Variable Declarations */
 variable_declaration
     : type IDENTIFIER PUNCT_TERMINATOR
-        { printf("   ✓ Variable declaration parsed\n"); }
+        { printf("   ✓ Line %d: Variable declaration: %s %s\n", line_num, saved_type, current_id); }
     | type IDENTIFIER OP_ASSIGN expression PUNCT_TERMINATOR
-        { printf("   ✓ Variable declaration with initialization parsed\n"); }
+        { printf("   ✓ Line %d: Variable declaration: %s %s := %s\n", line_num, saved_type, saved_id, current_value); }
     ;
 
 constant_declaration
     : KEYWORD_AIN type IDENTIFIER OP_ASSIGN expression PUNCT_TERMINATOR
-        { printf("   ✓ Constant declaration parsed\n"); }
+        { printf("   ✓ Line %d: Constant (ain): %s %s := %s\n", line_num, saved_type, saved_id, current_value); }
     ;
 
 /* Type Definitions */
 type
-    : KEYWORD_QAIDI_NO      { /* int */ }
-    | KEYWORD_FLOAT_SARKAR  { /* float */ }
-    | KEYWORD_BAYANIA       { /* string */ }
-    | KEYWORD_ISHARA        { /* char */ }
-    | KEYWORD_NAMALOOM      { /* void */ }
+    : KEYWORD_QAIDI_NO      { strcpy(saved_type, "qaidi_no"); }
+    | KEYWORD_FLOAT_SARKAR  { strcpy(saved_type, "float_sarkar"); }
+    | KEYWORD_BAYANIA       { strcpy(saved_type, "bayania"); }
+    | KEYWORD_ISHARA        { strcpy(saved_type, "ishara"); }
+    | KEYWORD_NAMALOOM      { strcpy(saved_type, "namaloom"); }
     ;
 
 /* Function Declaration */
 function_declaration
     : type IDENTIFIER PUNCT_EXPR_START parameter_list PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END
-        { printf("   ✓ Function declaration parsed\n"); }
+        { printf("   ✓ Line %d: Function: %s %s[[...]]\n", line_num, saved_type, saved_id); }
     | type IDENTIFIER PUNCT_EXPR_START PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END
-        { printf("   ✓ Function declaration (no params) parsed\n"); }
+        { printf("   ✓ Line %d: Function: %s %s[[]]\n", line_num, saved_type, saved_id); }
     ;
 
 parameter_list
@@ -139,12 +166,13 @@ parameter_list
 
 parameter
     : type IDENTIFIER
+        { printf("      └─ Parameter: %s %s\n", saved_type, current_id); }
     ;
 
 /* Class Declaration */
 class_declaration
     : KEYWORD_SAFEHOUSE IDENTIFIER PUNCT_BLOCK_START member_list PUNCT_BLOCK_END PUNCT_TERMINATOR
-        { printf("   ✓ Class (safehouse) declaration parsed\n"); }
+        { printf("   ✓ Line %d: Class (safehouse): %s\n", line_num, saved_id); }
     ;
 
 member_list
@@ -182,13 +210,13 @@ statement
 /* Assignment Statement */
 assignment_statement
     : IDENTIFIER OP_ASSIGN expression PUNCT_TERMINATOR
-        { printf("   ✓ Assignment statement parsed\n"); }
+        { printf("   ✓ Line %d: Assignment: %s := %s\n", line_num, saved_id, current_value); }
     ;
 
 /* If Statement (order_hai) */
 if_statement
     : KEYWORD_ORDER_HAI PUNCT_EXPR_START condition PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END else_if_part else_part
-        { printf("   ✓ Conditional statement (order_hai) parsed\n"); }
+        { printf("   ✓ Line %d: Conditional statement (order_hai) parsed\n", line_num); }
     ;
 
 else_if_part
@@ -204,7 +232,7 @@ else_part
 /* For Loop (long_march) */
 for_loop
     : KEYWORD_LONG_MARCH PUNCT_EXPR_START for_init condition PUNCT_TERMINATOR for_update PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END
-        { printf("   ✓ For loop (long_march) parsed\n"); }
+        { printf("   ✓ Line %d: For loop (long_march) parsed\n", line_num); }
     ;
 
 for_init
@@ -218,47 +246,47 @@ for_update
 /* While Loop (jab_tak_missing) */
 while_loop
     : KEYWORD_JAB_TAK_MISSING PUNCT_EXPR_START condition PUNCT_EXPR_END PUNCT_BLOCK_START statement_list PUNCT_BLOCK_END
-        { printf("   ✓ While loop (jab_tak_missing) parsed\n"); }
+        { printf("   ✓ Line %d: While loop (jab_tak_missing) parsed\n", line_num); }
     ;
 
 /* Output Statement (farmaan) */
 output_statement
     : KEYWORD_FARMAAN OP_OUTPUT expression PUNCT_TERMINATOR
-        { printf("   ✓ Output statement (farmaan) parsed\n"); }
+        { printf("   ✓ Line %d: Output (farmaan): << %s\n", line_num, current_value[0] ? current_value : current_id); }
     ;
 
 /* Input Statement (taftish) */
 input_statement
     : KEYWORD_TAFTISH OP_INPUT IDENTIFIER PUNCT_TERMINATOR
-        { printf("   ✓ Input statement (taftish) parsed\n"); }
+        { printf("   ✓ Line %d: Input (taftish): >> %s\n", line_num, current_id); }
     ;
 
 /* Return Statement (nro) */
 return_statement
     : KEYWORD_NRO expression PUNCT_TERMINATOR
-        { printf("   ✓ Return statement (nro) parsed\n"); }
+        { printf("   ✓ Line %d: Return (nro): %s\n", line_num, current_value[0] ? current_value : current_id); }
     | KEYWORD_NRO PUNCT_TERMINATOR
-        { printf("   ✓ Return statement (nro) parsed\n"); }
+        { printf("   ✓ Line %d: Return (nro): void\n", line_num); }
     ;
 
 /* Break Statement (deal_ho_gai) */
 break_statement
     : KEYWORD_DEAL_HO_GAI PUNCT_TERMINATOR
-        { printf("   ✓ Break statement (deal_ho_gai) parsed\n"); }
+        { printf("   ✓ Line %d: Break statement (deal_ho_gai) parsed\n", line_num); }
     ;
 
 /* Continue Statement (chaltay_raho) */
 continue_statement
     : KEYWORD_CHALTAY_RAHO PUNCT_TERMINATOR
-        { printf("   ✓ Continue statement (chaltay_raho) parsed\n"); }
+        { printf("   ✓ Line %d: Continue statement (chaltay_raho) parsed\n", line_num); }
     ;
 
 /* Function Call */
 function_call_statement
     : IDENTIFIER PUNCT_EXPR_START argument_list PUNCT_EXPR_END PUNCT_TERMINATOR
-        { printf("   ✓ Function call parsed\n"); }
+        { printf("   ✓ Line %d: Function call: %s[[...]]\n", line_num, saved_id); }
     | IDENTIFIER PUNCT_EXPR_START PUNCT_EXPR_END PUNCT_TERMINATOR
-        { printf("   ✓ Function call (no args) parsed\n"); }
+        { printf("   ✓ Line %d: Function call: %s[[]]\n", line_num, saved_id); }
     ;
 
 argument_list
