@@ -37,22 +37,23 @@ VigoLang is an educational programming language designed for learning compiler c
 
 ```
 Compiler_Project/
-├── 📁 Phase_1/                    # Lexical Analyzer
-│   ├── scanner.l                  # Flex scanner specification
-│   ├── test_program.vigo          # Sample VigoLang program
-│   ├── tokens.txt                 # Tokenization output
-│   ├── errors.txt                 # Error log
-│   ├── Phase_1_Report.tex         # LaTeX documentation
-│   └── PHASE_1_REPORT.pdf         # Compiled report
-│
-├── 📁 Phase_2/                    # Syntax Analyzer
-│   ├── parser.y                   # Bison parser specification
+├── 📁 Phase_2/                    # Syntax Analyzer (Phase 2)
+│   ├── parser.y                   # YACC parser specification
 │   ├── scanner.l                  # Modified scanner for parser
 │   ├── valid_program.vigo         # Valid test program
 │   ├── invalid_program.vigo       # Invalid test program (error demo)
 │   ├── Phase_2_Report.tex         # LaTeX documentation
 │   └── Phase_2_Report.pdf         # Compiled report
 │
+├── 📁 Test_With_Explicit_Errors/  # Error testing
+│
+├── scanner.l                      # Phase 1: Flex scanner specification
+├── test_program.vigo              # Phase 1: Sample VigoLang program
+├── tokens.txt                     # Phase 1: Tokenization output
+├── errors.txt                     # Phase 1: Error log
+├── PHASE_1_REPORT.pdf             # Phase 1: Compiled report
+├── DEMO_VigoLang.mp4              # Demo video
+├── LICENSE                        # MIT License
 └── README.md                      # This file
 ```
 
@@ -67,9 +68,7 @@ Compiler_Project/
 ### Phase 1: Lexical Analysis
 
 ```bash
-cd Phase_1
-
-# Compile the scanner
+# Compile the scanner (from root directory)
 flex scanner.l
 gcc lex.yy.c -o vigo_scanner -lfl
 
@@ -204,12 +203,12 @@ ghq[[ ]] {{
 
 ## 📝 Documentation
 
-- [Phase 1 Report](./Phase_1/PHASE_1_REPORT.pdf) - Lexical Analyzer Documentation
+- [Phase 1 Report](./PHASE_1_REPORT.pdf) - Lexical Analyzer Documentation
 - [Phase 2 Report](./Phase_2/Phase_2_Report.pdf) - Syntax Analyzer Documentation
 
 ## 🎥 Demo
 
-See the [demo video](./Phase_1/DEMO_VigoLang.mp4) for a complete walkthrough of the lexical analyzer.
+See the [demo video](./DEMO_VigoLang.mp4) for a complete walkthrough of the lexical analyzer.
 
 ## 👨‍💻 Author
 
