@@ -36,25 +36,32 @@ VigoLang is an educational programming language designed for learning compiler c
 ## 🗂️ Project Structure
 
 ```
-Compiler_Project/
-├── 📁 Phase_2/                    # Syntax Analyzer (Phase 2)
-│   ├── parser.y                   # YACC parser specification
-│   ├── scanner.l                  # Modified scanner for parser
-│   ├── valid_program.vigo         # Valid test program
-│   ├── invalid_program.vigo       # Invalid test program (error demo)
-│   ├── Phase_2_Report.tex         # LaTeX documentation
-│   └── Phase_2_Report.pdf         # Compiled report
+Compiler-Project-VigoLang/
+├── 📁 Phase_1/                         # Lexical Analyzer (Phase 1)
+│   ├── scanner.l                       # Flex scanner specification
+│   ├── test_program.vigo               # Sample VigoLang program
+│   ├── tokens.txt                      # Tokenization output
+│   ├── errors.txt                      # Error log
+│   ├── PHASE_1_REPORT.pdf              # Compiled report
+│   ├── DEMO_VigoLang.mp4               # Demo video
+│   └── 📁 Test_With_Explicit_Errors/   # Error testing
+│       ├── test_with_errors.vigo       # Test program with errors
+│       ├── tokens.txt                  # Tokenization output
+│       └── errors.txt                  # Error log
 │
-├── 📁 Test_With_Explicit_Errors/  # Error testing
+├── 📁 Phase_2/                         # Syntax Analyzer (Phase 2)
+│   ├── parser.y                        # YACC parser specification
+│   ├── scanner.l                       # Modified scanner for parser
+│   ├── valid_program.vigo              # Valid test program
+│   ├── invalid_program.vigo            # Invalid test program (error demo)
+│   ├── VigoLang_Phase_2_Document.pdf   # Compiled report
+│   ├── vigolang_parser                 # Compiled parser executable
+│   ├── lex.yy.c                        # Generated scanner C code
+│   ├── y.tab.c                         # Generated parser C code
+│   └── y.tab.h                         # Generated parser header
 │
-├── scanner.l                      # Phase 1: Flex scanner specification
-├── test_program.vigo              # Phase 1: Sample VigoLang program
-├── tokens.txt                     # Phase 1: Tokenization output
-├── errors.txt                     # Phase 1: Error log
-├── PHASE_1_REPORT.pdf             # Phase 1: Compiled report
-├── DEMO_VigoLang.mp4              # Demo video
-├── LICENSE                        # MIT License
-└── README.md                      # This file
+├── LICENSE                             # MIT License
+└── README.md                           # This file
 ```
 
 ## 🚀 Quick Start
@@ -68,7 +75,9 @@ Compiler_Project/
 ### Phase 1: Lexical Analysis
 
 ```bash
-# Compile the scanner (from root directory)
+cd Phase_1
+
+# Compile the scanner
 flex scanner.l
 gcc lex.yy.c -o vigo_scanner -lfl
 
@@ -83,7 +92,7 @@ cd Phase_2
 
 # Generate parser and scanner
 flex scanner.l
-yacc -d parser.y
+bison -d parser.y
 
 # Compile
 gcc lex.yy.c y.tab.c -o vigolang_parser -lfl
@@ -203,12 +212,12 @@ ghq[[ ]] {{
 
 ## 📝 Documentation
 
-- [Phase 1 Report](./PHASE_1_REPORT.pdf) - Lexical Analyzer Documentation
-- [Phase 2 Report](./Phase_2/Phase_2_Report.pdf) - Syntax Analyzer Documentation
+- [Phase 1 Report](./Phase_1/PHASE_1_REPORT.pdf) - Lexical Analyzer Documentation
+- [Phase 2 Report](./Phase_2/VigoLang_Phase_2_Document.pdf) - Syntax Analyzer Documentation
 
 ## 🎥 Demo
 
-See the [demo video](./DEMO_VigoLang.mp4) for a complete walkthrough of the lexical analyzer.
+See the [demo video](./Phase_1/DEMO_VigoLang.mp4) for a complete walkthrough of the lexical analyzer.
 
 ## 👨‍💻 Author
 
@@ -230,3 +239,4 @@ Made with ❤️ for Compiler Construction
 *"Where politics meets programming"*
 
 </div>
+
