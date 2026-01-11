@@ -1,0 +1,33 @@
+#* 
+VigoLang Invalid Test Program - Phase 2
+Author: Muhammad Ahmad
+Purpose: Demonstrate syntax errors and parser error detection
+*#
+
+### This program contains intentional syntax errors
+
+ghq[[ ]] {{
+    ### ERROR 1: Missing statement terminator (@)
+    qaidi_no ^x := 5
+    
+    ### This line will cause error because previous statement not terminated
+    farmaan << "This causes error"@
+    
+    ### ERROR 2: Missing closing block delimiter (}})
+    order_hai [[ ^x >? 0 ]] {{
+        farmaan << "Greater than zero"@
+    ### Missing }} here causes unmatched block error
+    
+    ### ERROR 3: Invalid expression - missing operator
+    qaidi_no ^y := 10 20@
+    
+    ### ERROR 4: Missing identifier prefix (^)
+    qaidi_no counter := 5@
+    
+    ### ERROR 5: Incorrect block delimiters (using single instead of double)
+    order_hai [[ ^x =? 5 ]] {
+        farmaan << "Single brace error"@
+    }
+    
+    nro 0@
+}}

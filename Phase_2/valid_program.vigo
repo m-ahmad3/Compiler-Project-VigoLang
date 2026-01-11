@@ -1,0 +1,90 @@
+#* 
+VigoLang Valid Test Program - Phase 2
+Author: Muhammad Ahmad
+Purpose: Demonstrate all language constructs with correct syntax
+*#
+
+### Function declaration (before main)
+namaloom ^calculate_sum[[ qaidi_no ^a, qaidi_no ^b ]] {{
+    qaidi_no ^result := ^a +: ^b@
+    farmaan << "Sum calculated:"@
+    farmaan << ^result@
+}}
+
+### Class declaration (before main)
+safehouse ^Calculator {{
+    qaidi_no ^value@
+    float_sarkar ^pi := 3.14159@
+    bayania ^name := "calculator"@
+    ishara ^symbol := 'C'@
+}}@
+
+### Constant declarations (before main)
+ain qaidi_no ^MAX_VALUE := 100@
+ain float_sarkar ^PI := 3.14159@
+
+### Boolean variable declarations
+qaidi_no ^is_active := neutral@
+qaidi_no ^is_disabled := janwar@
+
+### Main function - entry point
+ghq[[ ]] {{
+    ### Variable declarations with different types
+    qaidi_no ^number := 5@
+    qaidi_no ^factorial := 1@
+    qaidi_no ^counter := 1@
+    float_sarkar ^ratio := 2.5@
+    bayania ^message := "Welcome to VigoLang"@
+    ishara ^grade := 'A'@
+    qaidi_no ^flag := neutral@
+    
+    ### Output statement
+    farmaan << "Starting factorial calculation"@
+    farmaan << ^number@
+    
+    ### Conditional statement with else-if and else
+    order_hai [[ ^number <? 0 ]] {{
+        farmaan << "Error: Negative number"@
+        ^number := 0@
+    }}
+    doosra_order [[ ^number =? 0 ]] {{
+        ^factorial := 1@
+        farmaan << "Factorial of 0 is 1"@
+    }}
+    warna_vigo {{
+        ### For loop (long_march)
+        long_march [[ ^counter := 1@ ^counter <? ^number +: 1@ ^counter := ^counter +: 1 ]] {{
+            ^factorial := ^factorial *: ^counter@
+            
+            ### Nested conditional with break
+            order_hai [[ ^counter =? 10 ]] {{
+                farmaan << "Reached limit"@
+                deal_ho_gai@
+            }}
+            
+            ### Continue statement
+            order_hai [[ ^counter =? 3 ]] {{
+                chaltay_raho@
+            }}
+        }}
+    }}
+    
+    ### Display result
+    farmaan << "Factorial result:"@
+    farmaan << ^factorial@
+    
+    ### While loop demonstration
+    qaidi_no ^temp := ^number@
+    jab_tak_missing [[ ^temp >? 0 ]] {{
+        ^temp := ^temp -: 1@
+    }}
+    
+    ### Function call
+    ^calculate_sum[[ ^number, ^factorial ]]@
+    
+    bayania ^final_message := "Program complete"@
+    farmaan << ^final_message@
+    
+    ### Return statement
+    nro 0@
+}}
